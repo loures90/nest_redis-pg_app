@@ -6,11 +6,16 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
-import { CreateMovieDto } from './dto/create-movie-dto'
-import { MoviesService } from './movies.service'
+import { CreateMovieDto } from './dto/create-movie-dto';
+import { MoviesService } from './movies.service';
+import { AuthGuard } from '@nestjs/passport';
+
+class JwtAuthGuard extends AuthGuard('jwt') {}
 
 @Controller('api/v1/movies')
+@UseGuards(JwtAuthGuard)
 export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
   @Post()

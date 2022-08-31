@@ -6,6 +6,7 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { UserModule } from '../app/users/users.module';
 import { localStrategy } from './strategies/local.strategy';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [
@@ -14,10 +15,10 @@ import { localStrategy } from './strategies/local.strategy';
     PassportModule,
     JwtModule.register({
       privateKey: process.env.JWT_SECRET,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '1h' },
     }),
   ],
-  providers: [AuthService, localStrategy],
+  providers: [AuthService, localStrategy, JwtStrategy],
   controllers: [AuthController],
 })
 export class AuthModule {}

@@ -18,8 +18,10 @@ export class UserService {
     if (userExist) {
       throw new BadRequestException('email already registered');
     }
-    const user = this.userRepository.create(data);
-    return this.userRepository.save(user);
+    const { password, ...user } = await this.userRepository.save(
+      this.userRepository.create(data),
+    );
+    return user;
   }
 
   async findOneOrFail(options: FindOneOptions<UserEntity>) {
