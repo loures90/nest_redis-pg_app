@@ -1,9 +1,10 @@
-import { Module } from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './app/users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { MoviesModule } from './app/movies/movies.module';
+import * as redisStore from 'cache-manager-redis-store';
 
 @Module({
   imports: [
@@ -21,6 +22,16 @@ import { MoviesModule } from './app/movies/movies.module';
     UserModule,
     AuthModule,
     MoviesModule,
+    CacheModule.register({
+      store: redisStore,
+      socket: {
+        host: process.env.REDIS_HOST,
+        port: process.env.REDIS_PORT,
+      },
+      password: process.env.REDIS_PASSWORD,
+      isGlobal: true,
+      ttl: 60,
+    }),
   ],
   controllers: [],
   providers: [],

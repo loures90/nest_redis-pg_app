@@ -11,6 +11,16 @@ services:
       - '5432:5432'
     volumes: 
       - db:/var/lib/postgresql/data
+  cache:
+    image: redis:alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --requirepass fjarhasd3543958tnj
+    volumes: 
+      - cache:/data
 volumes:
   db:
+    driver: local
+  cache:
     driver: local

@@ -1,5 +1,6 @@
 import {
   Body,
+  CacheInterceptor,
   Controller,
   Delete,
   Get,
@@ -7,6 +8,7 @@ import {
   Post,
   Put,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CreateMovieDto } from './dto/create-movie-dto';
 import { MoviesService } from './movies.service';
@@ -14,6 +16,7 @@ import { AuthGuard } from '@nestjs/passport';
 
 class JwtAuthGuard extends AuthGuard('jwt') {}
 
+@UseInterceptors(CacheInterceptor)
 @Controller('api/v1/movies')
 @UseGuards(JwtAuthGuard)
 export class MoviesController {
