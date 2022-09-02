@@ -1,4 +1,4 @@
-# Movie API
+# Movies API
 
 The project is a CRUD of movies collections. It was built to study the technologies:
 
@@ -29,4 +29,4 @@ The Api authenticate users by Json Web Token provided when the login is succeed.
 
 It also Caches the movies list.
 
-* It is an on going project, but it was useful to understand how Nestjs facilitate swagger, redis, authorization, authentication and database configs. 
+* It is an on going project, but it was useful to understand how Nestjs facilitates swagger, redis, authorization, authentication and database configs. 
